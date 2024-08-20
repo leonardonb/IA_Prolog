@@ -8,6 +8,9 @@
 :- discontiguous animal/2.
 :- discontiguous subordem/2.
 
+
+%-------------------REGRAS-----------------------
+
 % Reino: Animalia (Animais)
 reino(animalia).
 
@@ -124,6 +127,9 @@ classe(demospongiae, porifera).
 familia(spongidae, demospongiae).
 animal(esponja, spongidae).
 
+
+%-------------------QUERIES-----------------------
+
 eh_animal(Animal) :- animal(Animal, _).
 eh_familia(Familia) :- familia(Familia, _).
 eh_ordem(Ordem) :- ordem(Ordem, _).
@@ -148,4 +154,58 @@ todos_os_animais(Animais) :-
 
 todos_os_reinos(Reinos) :-
     findall(Reino, reino(Reino), Reinos).
+
+numero_de_especies_por_familia(Familia, NumeroDeEspecies) :-
+    findall(Animal, animal(Animal, Familia), Animais),
+    length(Animais, NumeroDeEspecies).
+
+hierarquia_por_nivel(ordem, Classe, Ordens) :-
+    findall(Ordem, ordem(Ordem, Classe), Ordens).
+
+hierarquia_por_nivel(familia, Ordem, Familias) :-
+    findall(Familia, familia(Familia, Ordem), Familias).
+
+hierarquia_por_nivel(animal, Familia, Animais) :-
+    findall(Animal, animal(Animal, Familia), Animais).
+
+busca_avancada(Classe, Ordem, Animais) :-
+    findall(Animal, (animal(Animal, Familia), familia(Familia, Ordem), ordem(Ordem, Classe)), Animais).
+
+exibir_hierarquia_completa(Animal) :-
+    hierarquia_completa(Animal, [Reino, Filo, Classe, Ordem, Familia, Subordem, Animal]),
+    format("Reino: ~w~n", Reino),
+    format("Filo: ~w~n", Filo),
+    format("Classe: ~w~n", Classe),
+    format("Ordem: ~w~n", Ordem),
+    format("SubOrdem: ~w~n", Subordem),
+    format("Familia: ~w~n", Familia),
+    format("Animal: ~w~n", Animal).
+
+
+%-------------------QUERIES AUX-----------------------
+
+hierarquia_completa(Animal, [Reino, Filo, Classe, Ordem, Familia, Subordem, Animal]) :-
+    animal(Animal, FamiliaSubordem),
+    familia_subordem(FamiliaSubordem, [Familia, Subordem, OrdemClasse]),
+    ordem_classe(OrdemClasse, [Classe, Ordem]),
+    classe(Classe, Filo),
+    filo(Filo, Reino).
+
+familia_subordem(FamiliaSubordem, [Familia, Subordem, Ordem]):-
+    familia(FamiliaSubordem, Ordem) -> (
+        Familia = FamiliaSubordem,
+        Subordem = '-'
+    ); (
+        subordem(FamiliaSubordem, Ordem),
+        Subordem = FamiliaSubordem, Familia = '-'
+    ).
+
+ordem_classe(OrdemClasse, [Classe, Ordem]) :-
+    (ordem(OrdemClasse, Classe) ->
+        (Ordem = OrdemClasse) ; (
+            Classe = OrdemClasse,
+            Ordem = '-'
+        )
+    ).
+
 
