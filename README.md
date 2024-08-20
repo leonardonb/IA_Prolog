@@ -16,19 +16,19 @@
    *Família*: *Canidae* (Canídeos)
     *Cão*
 
-*Ordem*: *Artiodactyla* (Artiodáctilos)
- *Família*: *Elephantidae* (Elefantes)
-  *Elefante*
+  *Ordem*: *Artiodactyla* (Artiodáctilos)
+   *Família*: *Elephantidae* (Elefantes)
+    *Elefante*
 
- *Família*: *Giraffidae* (Girafas)
-  *Girafa*
+  *Família*: *Giraffidae* (Girafas)
+   *Girafa*
 
- *Família*: *Equidae* (Equídeos)
-  *Cavalo*
+  *Família*: *Equidae* (Equídeos)
+   *Cavalo*
 
-*Ordem*: *Perissodactyla* (Perissodáctilos)
- *Família*: *Rhinocerotidae* (Rinocerontes)
-  *Rinoceronte*
+ *Ordem*: *Perissodactyla* (Perissodáctilos)
+  *Família*: *Rhinocerotidae* (Rinocerontes)
+   *Rinoceronte*
 
  *Ordem*: *Cetacea* (Cetáceos)
   *Família*: *Delphinidae* (Delfinídeos)
